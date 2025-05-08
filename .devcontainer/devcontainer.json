@@ -1,0 +1,17 @@
+{
+  "name": "What's for Lunch Dev Container",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/var/www/html",
+  "remoteUser": "devuser",
+  "forwardPorts": [8000],
+  "postCreateCommand": "composer install && php artisan key:generate",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "onecentlin.laravel-blade"
+      ]
+    }
+  }
+}
