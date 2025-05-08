@@ -3,7 +3,7 @@ FROM composer:2 as vendor
 
 WORKDIR /app
 
-COPY composer.json composer.lock ./
+COPY laravel/composer.json laravel/composer.lock ./
 RUN composer install --no-dev --optimize-autoloader
 
 # 本番用ステージ
