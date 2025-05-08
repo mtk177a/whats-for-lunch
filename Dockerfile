@@ -18,10 +18,10 @@ RUN apt-get update && apt-get install -y \
 COPY nginx/default.prod.conf /etc/nginx/conf.d/default.conf
 
 # 作業ディレクトリ
-WORKDIR /var/www/html
+WORKDIR /var/www/html/laravel
 
 # アプリケーションコードコピー
-COPY . .
+COPY laravel/ .
 
 # Composerのvendorコピー
 COPY --from=vendor /app/vendor ./vendor

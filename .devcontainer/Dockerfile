@@ -22,7 +22,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # 作業ディレクトリ
-WORKDIR /var/www/html
+WORKDIR /var/www/html/laravel
 
 # デフォルトユーザー切り替え
 USER $USERNAME
