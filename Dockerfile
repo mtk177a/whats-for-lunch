@@ -33,4 +33,4 @@ RUN chmod -R 775 storage bootstrap/cache
 EXPOSE 10000
 
 # 起動スクリプト
-CMD service nginx start && php-fpm
+CMD php artisan migrate --force && service nginx start && php-fpm
