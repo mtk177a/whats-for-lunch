@@ -40,6 +40,14 @@ COPY --from=vendor /app/vendor ./vendor
 # Viteのビルド済みファイルコピー
 COPY --from=frontend /app/public/build ./public/build
 
+# デバッグ出力：public/build ディレクトリ確認
+RUN echo "==== /public/build contents ====" \
+    && ls -l ./public/build \
+    && echo "==== /public/build/css contents ====" \
+    && ls -l ./public/build/css \
+    && echo "==== /public/build/js contents ====" \
+    && ls -l ./public/build/js
+
 # 権限設定
 RUN chown -R www-data:www-data storage bootstrap/cache
 
