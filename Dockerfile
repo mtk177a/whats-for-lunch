@@ -27,7 +27,7 @@ COPY laravel/ .
 COPY --from=vendor /app/vendor ./vendor
 
 # 権限設定
-RUN chmod -R 775 storage bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache
 
 # ポート公開（Render用: 10000番）
 EXPOSE 10000
