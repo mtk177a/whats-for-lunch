@@ -1,10 +1,21 @@
-# ビルド用ステージ
+# Composer依存インストールステージ
 FROM composer:2 as vendor
 
 WORKDIR /app
 
 COPY laravel/ ./
 RUN composer install --no-dev --optimize-autoloader
+
+# Node.js依存インストール＆ビルドステージ
+FROM node:22 as frontend
+
+WORKDIR /app
+
+COPY laravel/package.json laravel/package-lock.json ./
+RUN npm ci
+
+COPY laravel/ ./
+RUN npm run build
 
 # 本番用ステージ
 FROM php:8.4-fpm
@@ -25,6 +36,9 @@ COPY laravel/ .
 
 # Composerのvendorコピー
 COPY --from=vendor /app/vendor ./vendor
+
+# Viteのビルド済みファイルコピー
+COPY --from=frontend /app/public/build ./public/build
 
 # 権限設定
 RUN chown -R www-data:www-data storage bootstrap/cache
